@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-use App\Models\Jugador;
+
 use App\Models\Posicion;
-//use App\Models\Equipo;
+use App\Models\Equipo;
+use App\Models\Jugador;
+
 use Illuminate\Support\Facades\file;
 
 class JugadoresController extends Controller
@@ -17,9 +18,13 @@ class JugadoresController extends Controller
      */
     public function index()
     {
-        $jugadores=Jugador::all();
+        $jugadores=Jugador::find($id);
+        $equipos=Equipo::all();
+        $posiciones=Posicion::all();
         return view('jugadores.index')
-                ->with('jugador',$jugadores);
+                ->with('jugador',$jugadores)
+                ->with('equipos',$equipos)
+                ->with('posiciones',$posiciones);
     }
 
     /**
@@ -29,7 +34,12 @@ class JugadoresController extends Controller
      */
     public function create()
     {
-        return view('jugadores.create');
+        $posiciones= Posicion::all();
+        $equipos=Equipo::all();
+        return view('jugadores.create')
+                    ->with('posiciones',$posiciones)
+                    ->with('equipos',$equipos);
+                
     }
 
     /**
@@ -40,21 +50,23 @@ class JugadoresController extends Controller
      */
     public function store(Request $request)
     {
-        //$posiciones=Posiciones::all();
-        //$equipos=Equipo::all();
+        $posiciones=Posicion::all();
+        $equipos=Equipo::all();
+        
         if($request->hasFile('foto')){
             $file=$request->file('foto');
-            $foto=time(). $file->getClientOriginalName();
+            $foto=$file->getClientOriginalName();
             $file->move('imagenes/jugadores',$foto);
         }
         $jugador = new Jugador();
         $jugador->nombre=$request->nombre;
-        $jugador->posiciones=$request->posiciones['id'];
+        $jugador->posicion_id=$request->posicion;
         $jugador->numero=$request->numero;
         $jugador->equipo_id=$request->equipo;
         $jugador->foto=$foto;
         $jugador->save();
-        return 'Guardado';
+        return redirect()->route('jugadores.index')->with('status','Jugador Creado');
+        
     }
 
     /**
@@ -79,7 +91,13 @@ class JugadoresController extends Controller
      */
     public function edit($id)
     {
-        //
+        $jugadores= Jugador::find($id);
+        $posiciones= Posicion::all();
+        $equipos= Equipo::all();
+        return view('jugadores.edit')
+                    ->with('jugador',$jugadores)
+                    ->with('posiciones',$posiciones)
+                    ->with('equipos',$equipos);
     }
 
     /**
@@ -91,7 +109,21 @@ class JugadoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $jugador = Jugador::find($id);
+        $jugador->nombre=$request->nombre;
+        $jugador->posicion_id=$request->posicion;
+        $jugador->numero=$request->numero;
+        $jugador->equipo_id=$request->equipo;
+        if($request->hasFile('foto'))
+        {
+            $file=$request->file('foto');
+            $foto=$jugador->foto;
+            $file->move('imagenes/jugadores',$foto);
+        }
+        $jugador->save();
+        return redirect()->route('jugadores.index')
+                                ->with('status','Jugador actualizado');
+
     }
 
     /**
@@ -102,11 +134,11 @@ class JugadoresController extends Controller
      */
     public function destroy($id)
     {
-        $jugador=Jugador::find($id);
+       /* $jugador=Jugador::find($id);
         $jugador->delete();
         File::delete('imagenes/jugadores/'.$jugador->foto);
         return redirect()->route('jugadores.index')
-                            ->with('status','Jugador eliminado');
+                            ->with('status','Jugador eliminado');*/
     }
 
        

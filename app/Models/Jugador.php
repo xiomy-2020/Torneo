@@ -9,9 +9,9 @@ class Jugador extends Model
 {
     protected $table = 'jugadores';
     public function equipo(){
-    	return $this->belongsTo('App\Equipo');
+    	return $this->belongsTo('App\Models\Equipo');
     }
     public function posicion(){
-    	return $this->belongsTo('App\Posicion');
+    	return $this->belongsTo('App\Models\Posicion');
     }
 }

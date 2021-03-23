@@ -10,13 +10,13 @@
 		</div>
 		<div class="form-group">
 			<label for="posicion">Posicion</label>
-			<select>
+			<select class="form-control" name="posicion">
 				@foreach($posiciones as $posicion)
 				<option value="{{$posicion->id}}">{{$posicion->nombre}}</option>
 				@endforeach
 			</select>
 
-			<input type="posicion" name="posicion_id" class="form-control">
+			
 		</div>
 		<div class="form-group">
 			<label for="numero">Numero</label>
@@ -24,10 +24,14 @@
 		</div>
 		<div class="form-group">
 			<label for="equipo">Equipo</label>	
-			<select>
-				<option value="{{$equipo->id}}"></option>
-			</select>		
-			<input type="equipo" name="equipo_id" class="form-control">
+			<select class="form-control" name="equipo">
+				@foreach($equipos as $equipo)
+				<option value="{{$equipo->id}}" name="equipos">{{$equipo->nombre}}</option>
+				@endforeach
+			</select>
+			
+
+		
 			
 			
 		</div>

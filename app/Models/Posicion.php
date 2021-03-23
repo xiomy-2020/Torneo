@@ -9,6 +9,6 @@ class Posicion extends Model
 {
     protected $table= 'posiciones';
     public function jugadores(){
-    	return $this->hasMany('App\Jugador');
+    	return $this->hasMany('App\Models\Jugador');
     }
 }
