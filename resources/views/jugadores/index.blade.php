@@ -34,15 +34,33 @@
 					</h4>
 				</th>
 				<th>
-					<h5>
-						{{$jugador['posicion']}}
-					</h5>
+					
+					<select class="form-group" name="posicion">
+						@foreach($posiciones as $posicion)
+							@if($jugador->posicion_id==$posicion->id)
+								<option selected value="{{$posicion->id}}">{{$posicion->nombre}}</option>
+							@else
+								<option value="{{$posicion->id}}">{{$posicion->nombre}}</option>
+							@endif
+						@endforeach
+					</select>
+					
 				</th>
 				<th>
 					<h5>{{$jugador['numero']}}</h5>
 				</th>
 				<th>
-					<h5>{{$jugador}}</h5>
+					<h5>
+						<select class="form-control" name="equipo">
+							@foreach($equipos as $equipo)
+									@if($equipo->equipo_id==$equipo->id)
+											<option selected value="{{$equipo->id}}">{{$equipo->nombre}}</option>
+									@else
+											<option value="{{$equipo->id}}">{{$equipo->nombre}}</option>
+									@endif
+							@endforeach
+						</select>
+					</h5>
 				</th>
 				<th>
 					<a href="{{url('jugadores/'.$jugador->id)}}" type="submit" class="btn btn-primary">Ver</a>

@@ -9,10 +9,17 @@
 	</div>
 	<div class="col-sm-8">
 		<p class="h3"><strong>{{$jugador['nombre']}}</strong></p>
-		<p class="h5">
+			@foreach($posiciones as $posicion)
 			
-			<strong>{{$jugador['posicion']}}</strong>
-		</p>
+				@if($jugador->posicion_id==$posicion->id)
+						<option selected value="{{$posicion->id}}">{{$posicion->nombre}}</option>
+					@else
+						<option value="{{$posicion->id}}">{{$posicion->nombre}}</option>
+					@endif
+				<strong name="posicion">{{ $posicion->id}}</strong>
+			
+			@endforeach
+		
 		<p class="h5"><strong>{{$jugador['numero']}}</strong></p>
 		<p class="h5">{{$jugador['equipo']}}</p>
 		<form class="delete d-inline" action="{{url('/jugadores/'.$jugador->id)}}" method="post">

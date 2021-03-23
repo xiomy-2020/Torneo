@@ -18,7 +18,7 @@ class JugadoresController extends Controller
      */
     public function index()
     {
-        $jugadores=Jugador::find($id);
+        $jugadores=Jugador::all();
         $equipos=Equipo::all();
         $posiciones=Posicion::all();
         return view('jugadores.index')
@@ -77,10 +77,13 @@ class JugadoresController extends Controller
      */
     public function show($id)
     {
+        $equipo=Equipo::find($id);
+        $posiciones=Posicion::find($id);
         $jugador= Jugador::find($id);
         return view('jugadores.show')
                 ->with('id',$id)
-                ->with('jugador',$jugador);
+                ->with('jugador',$jugador)
+                ->with('posiciones',$posiciones);
     }
 
     /**
