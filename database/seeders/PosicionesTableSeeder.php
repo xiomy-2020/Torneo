@@ -25,5 +25,9 @@ class PosicionesTableSeeder extends Seeder
         $posicion= new Posicion();
         $posicion->nombre='Delantero';
         $posicion->save();
+
+        $posicion= new Posicion();
+        $posicion->nombre='Portero';
+        $posicion->save();
     }
 }

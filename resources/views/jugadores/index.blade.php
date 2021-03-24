@@ -34,38 +34,32 @@
 					</h4>
 				</th>
 				<th>
-					
-					<select class="form-group" name="posicion">
-						@foreach($posiciones as $posicion)
-							@if($jugador->posicion_id==$posicion->id)
-								<option selected value="{{$posicion->id}}">{{$posicion->nombre}}</option>
-							@else
-								<option value="{{$posicion->id}}">{{$posicion->nombre}}</option>
-							@endif
-						@endforeach
-					</select>
-					
+				@foreach($posiciones as $posicion)
+					@if($jugador->posicion_id==$posicion->id)
+						<strong >{{$posicion->nombre}}</strong>
+					@endif
+				@endforeach	
 				</th>
 				<th>
 					<h5>{{$jugador['numero']}}</h5>
 				</th>
-				<th>
-					<h5>
-						<select class="form-control" name="equipo">
-							@foreach($equipos as $equipo)
-									@if($equipo->equipo_id==$equipo->id)
-											<option selected value="{{$equipo->id}}">{{$equipo->nombre}}</option>
-									@else
-											<option value="{{$equipo->id}}">{{$equipo->nombre}}</option>
-									@endif
-							@endforeach
-						</select>
-					</h5>
+				<th>										
+					@foreach($equipos as $equipo)
+						@if($jugador->equipo_id==$equipo->id)
+							<strong>{{$equipo->nombre}}</strong>									
+						@endif
+					@endforeach
+					
+					
 				</th>
 				<th>
 					<a href="{{url('jugadores/'.$jugador->id)}}" type="submit" class="btn btn-primary">Ver</a>
 					<a href="/jugadores/{{$jugador->id}}/edit" type="submit" class="btn btn-success">Modificar</a>
-					<a href="/jugadores" type="submit" class="btn btn-danger">Eliminar</a>
+					<form class="delete d-inline" action="{{url('/jugadores/'.$jugador->id)}}" method="post">
+						@method('DELETE')
+						@csrf
+						<button type="submit" class="btn btn-danger">Eliminar</button>
+					</form>
 				</th>
 
 				

@@ -77,13 +77,14 @@ class JugadoresController extends Controller
      */
     public function show($id)
     {
-        $equipo=Equipo::find($id);
-        $posiciones=Posicion::find($id);
+        $equipos=Equipo::all();
+        $posiciones=Posicion::all();
         $jugador= Jugador::find($id);
         return view('jugadores.show')
                 ->with('id',$id)
                 ->with('jugador',$jugador)
-                ->with('posiciones',$posiciones);
+                ->with('posiciones',$posiciones)
+                ->with('equipos',$equipos);
     }
 
     /**
@@ -137,11 +138,11 @@ class JugadoresController extends Controller
      */
     public function destroy($id)
     {
-       /* $jugador=Jugador::find($id);
+        $jugador=Jugador::find($id);
         $jugador->delete();
         File::delete('imagenes/jugadores/'.$jugador->foto);
         return redirect()->route('jugadores.index')
-                            ->with('status','Jugador eliminado');*/
+                            ->with('status','Jugador eliminado');
     }
 
        

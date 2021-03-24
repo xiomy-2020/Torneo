@@ -11,7 +11,12 @@
     <title>Torneo - @yield('title')</title>
   </head>
   <body>
-    @include('partials.navbar')
+    @guest
+      @include('partials.navbar2')
+    @else
+      @include('partials.navbar')
+    @endguest
+    
    <div class="container">
      @yield('content')
    </div>
