@@ -54,12 +54,14 @@
 				</th>
 				<th>
 					<a href="{{url('jugadores/'.$jugador->id)}}" type="submit" class="btn btn-primary">Ver</a>
+					@if(Auth::user()->rol == 1)	
 					<a href="/jugadores/{{$jugador->id}}/edit" type="submit" class="btn btn-success">Modificar</a>
 					<form class="delete d-inline" action="{{url('/jugadores/'.$jugador->id)}}" method="post">
 						@method('DELETE')
 						@csrf
 						<button type="submit" class="btn btn-danger">Eliminar</button>
 					</form>
+					@endif
 				</th>
 
 				

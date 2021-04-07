@@ -24,15 +24,18 @@
 			@endif
 		@endforeach
 
-
+		@if(Auth::user()->rol == 1)		
 		<form class="delete d-inline" action="{{url('/jugadores/'.$jugador->id)}}" method="post">
 			@method('DELETE')
 			@csrf
 			<button type="submit" class="btn btn-danger">Eliminar</button>
 		</form>
 		
+		
 		<a href="/jugadores/{{$jugador->id}}/edit" type="submit" class="btn btn-success">Modificar</a>
+		@endif
 		<a href="/jugadores" type="submit" class="btn btn-info">Ver Jugadores</a>
+		
 	</div>
 </div>
 @stop

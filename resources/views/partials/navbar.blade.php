@@ -7,14 +7,18 @@
 				<a class="nav-link dropdown-toggle" href="#" id="navbarNavDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">EQUIPOS</a>
 					<div class="dropdown-menu" aria-labelledby="navbarNavDropdownMenuLink">
 						<a class="dropdown-item" href="{{url('/equipos')}}">Ver Equipos</a>
+						@if(Auth::user()->rol ==1)
 						<a class="dropdown-item" href="{{url('/equipos/create')}}">Nuevo Equipo</a>
+						@endif
 					</div>
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarNavDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">JUGADORES</a>
 					<div class="dropdown-menu" aria-labelledby="navbarNavDropdownMenuLink">
 						<a class="dropdown-item" href="{{url('/jugadores')}}">Ver Jugadores</a>
+						@if(Auth::user()->rol==1)
 						<a class="dropdown-item" href="{{url('/jugadores/create')}}">Nuevo Jugador</a>
+						@endif
 					</div>
 				</li>
 			</ul>

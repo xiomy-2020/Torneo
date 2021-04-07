@@ -74,6 +74,10 @@ class EquiposController extends Controller
      */
     public function edit($id)
     {
+        if(Auth::user()->rol==2){
+            return redirect()->route('equipos.index');
+        }
+
         $equipo= Equipo::find($id);
         return view('equipos.edit')
                 ->with('equipo',$equipo);

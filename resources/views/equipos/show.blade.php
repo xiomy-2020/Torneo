@@ -10,13 +10,14 @@
 	<div class="col-sm-8 ">
 		<p class="h3">{{$equipo['nombre']}}</p>
 		<p class="h5">{{$equipo['dt']}}</p>
-		
-		<form class="delete d-inline" action="{{url('/equipos/'.$equipo->id)}}" method="post">
+		@if(Auth::user()->rol==1)
+			<form class="delete d-inline" action="{{url('/equipos/'.$equipo->id)}}" method="post">
 			@method('DELETE')
 			@csrf
 			<button type="submit" class="btn btn-danger">Eliminar</button>
 		</form>
 		<a href="/equipos/{{$equipo->id}}/edit" class="btn btn-warning">Modificar</a>
+		@endif
 		<a href="/equipos" class="btn btn-dark">Ver Equipos</a>
 	</div>
 @stop

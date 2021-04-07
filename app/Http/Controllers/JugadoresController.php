@@ -8,6 +8,7 @@ use App\Models\Equipo;
 use App\Models\Jugador;
 
 use Illuminate\Support\Facades\file;
+use Illuminate\Support\Facades\Auth;
 
 class JugadoresController extends Controller
 {
@@ -95,6 +96,9 @@ class JugadoresController extends Controller
      */
     public function edit($id)
     {
+        if(Auth::user()->rol==1){
+            return redirect()->route('jugadores.index');
+        }
         $jugadores= Jugador::find($id);
         $posiciones= Posicion::all();
         $equipos= Equipo::all();

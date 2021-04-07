@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/','InicioController@index');
-Route::resource('equipos','EquiposController');
-Route::resource('jugadores','JugadoresController');
+Route::resource('equipos','EquiposController')->middleware('auth');
+Route::resource('jugadores','JugadoresController')->middleware('auth');
 
 /*
 Route::get('equipos', function () {
